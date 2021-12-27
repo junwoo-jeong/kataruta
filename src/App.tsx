@@ -18,6 +18,7 @@ function App() {
         <p>
           Edit <code>App.tsx</code> and save to test HMR updates. Lint Test
         </p>
+        <p>Lint</p>
         <p>
           <a
             className="App-link"
