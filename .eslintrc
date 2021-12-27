@@ -14,6 +14,7 @@
     "plugin:react/recommended",
     "plugin:jsx-a11y/recommended",
     "plugin:react/jsx-runtime",
+    "plugin:tailwind/recommended",
     "prettier"
   ],
   "rules": {
