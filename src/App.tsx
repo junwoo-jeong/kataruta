@@ -1,46 +1,22 @@
-import { useState } from 'react';
-import logo from '@/logo.svg';
-import '@/App.css';
+import type { ReactElement } from 'react';
+import { lazy, Suspense } from 'react';
+import { RecoilRoot } from 'recoil';
 
-function App() {
-  const [count, setCount] = useState(0);
+import LoadingOrError from '@/components/LoadingOrError';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
+const MainPage = lazy(async () => import('@/pages/main/MainPage'));
+
+export default function App(): ReactElement {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates. Lint Test
-        </p>
-        <p>Lint</p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
-    </div>
+    <RecoilRoot>
+      <BrowserRouter>
+        <Suspense fallback={<LoadingOrError />}>
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+          </Routes>
+        </Suspense>
+      </BrowserRouter>
+    </RecoilRoot>
   );
 }
-
-export default App;
