@@ -1,0 +1,13 @@
+.gradient-bg {
+  @apply min-h-screen;
+  @apply bg-gradient-to-b from-gd-stripe-start via-gd-stripe-middle to-gd-stripe-end;
+}
+
+.pattern-bg {
+  @apply min-h-screen;
+  @apply bg-food-pattern;
+}
+
+.container {
+  @apply flex flex-row items-start justify-center min-h-screen;
+}

@@ -2,27 +2,26 @@ import type { ReactElement } from 'react';
 
 // Import { useRecoilValue } from 'recoil';
 // Import mainAtom from '@/recoil/main/atom';
+import { Link } from 'react-router-dom';
 
-import PageTemplate from '@/components/PageTemplate';
+import PageTemplate from '@/components/base/PageTemplate';
 
 // Interface Properties {}
 
-export default function Template(): ReactElement {
+export default function MainPage(): ReactElement {
   return (
     <PageTemplate>
-      <div className="w-11/12 bg-transparent border-4 shadow rounded-xl border-slate-900/[.15] h-1/2">
-        <main className="flex flex-col h-full p-2 gap-y-4">
-          <div className="flex justify-around flex-1 flex-low">
-            <span className="glow">logo</span>
-          </div>
-          <div className="flex items-center justify-center flex-1 flex-low grow">
-            <div className="">config section</div>
-            <div className="">description section</div>
-          </div>
-          <div className="flex justify-center flex-1 flex-low">
-            <span>footer</span>
-          </div>
-        </main>
+      <div className="flex flex-col justify-around w-1/2 pt-24 min-h-[80vh]">
+        <div className="mb-8 text-center">
+          <span className="font-black tracking-widest text-white text-8xl">
+            KATARUTA
+          </span>
+        </div>
+        <Link to="/game">
+          <button className="w-full py-3 text-3xl font-bold text-white shadow-2xl bg-black/[.25] rounded-xl hover:bg-black/[.35]">
+            Play!
+          </button>
+        </Link>
       </div>
     </PageTemplate>
   );

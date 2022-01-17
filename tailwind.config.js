@@ -9,6 +9,8 @@ module.exports = {
       colors: {
         'electric-violet-start': '#4776E6',
         'electric-violet-end': '#8E54E9',
+        'juicy-orange-start': '#FF8008',
+        'juicy-orange-end': '#FFC837',
         'gd-stripe-start': '#1FA2FF',
         'gd-stripe-middle': '#12D8FA',
         'gd-stripe-end': '#A6FFCB',
