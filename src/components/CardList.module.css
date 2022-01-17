@@ -1,0 +1,3 @@
+.CardList {
+  @apply flex justify-evenly items-center;
+}

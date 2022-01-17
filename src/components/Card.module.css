@@ -1,0 +1,55 @@
+.card {
+  @apply bg-gradient-to-b rounded-xl shadow-2xl h-72 w-80 m-5 px-5 relative;
+  @apply cursor-pointer text-center;
+
+  transition: height 1000ms;
+}
+
+.opened {
+  @apply h-96;
+}
+
+.label {
+  @apply h-[230px] w-[230px] inline;
+
+  transform: translateY(10px);
+  transition: transform 1000ms;
+}
+
+.card.opened .label {
+  transform: translateY(0);
+}
+
+.text1 {
+  clip-path: polygon(0% 100%, 0 -90%, 50% -5%, 100% -90%, 100% 100%);
+  transition: clip-path 1000ms;
+}
+
+.card.opened .text1 {
+  clip-path: polygon(0% 100%, 0 -100%, 50% -15%, 100% -100%, 100% 100%);
+}
+
+.text-content {
+  transform: translateY(-160px);
+  transition: transform 1000ms;
+}
+
+.card.opened .text-content {
+  transform: translateY(0);
+}
+
+.chevron {
+  @apply absolute bottom-5 left-36;
+
+  transform-origin: 50%;
+  transform: rotate(180deg);
+  transition: transform 1000ms;
+}
+
+.card.opened .chevron {
+  transform: rotate(0deg);
+}
+
+.title {
+  @apply mt-10 text-white text-5xl font-bold;
+}
