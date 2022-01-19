@@ -1,0 +1,33 @@
+.typing {
+  white-space: nowrap;
+  overflow: hidden;
+  @apply max-w-fit text-4xl text-white font-bold text-center;
+}
+
+.open {
+  animation-name: open;
+  animation-duration: 3s;
+}
+
+.close {
+  animation-name: close;
+  animation-duration: 2s;
+}
+
+@keyframes open {
+  from {
+    max-width: 0;
+  }
+  to {
+    max-width: calc(100%);
+  }
+}
+
+@keyframes close {
+  from {
+    max-width: calc(100%);
+  }
+  to {
+    max-width: 0;
+  }
+}

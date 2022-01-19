@@ -85,10 +85,20 @@ export default function useCardList() {
     [cardList]
   );
 
-  return [cardList, setCardList, onReset, onToggle] as [
+  const onAllClose = useCallback(() => {
+    setCardList(
+      cardList.map((card) => ({
+        ...card,
+        isOpen: false,
+      }))
+    );
+  }, [cardList]);
+
+  return [cardList, setCardList, onReset, onToggle, onAllClose] as [
     typeof defaultValue,
     typeof setCardList,
     typeof onReset,
-    typeof onToggle
+    typeof onToggle,
+    typeof onAllClose
   ];
 }

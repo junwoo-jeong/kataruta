@@ -1,29 +1,39 @@
-import { ReactElement, useState } from 'react';
+import { ReactElement, useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 
+// Components
 import PageTemplate from '@/components/base/PageTemplate';
 import CardList from '@/components/CardList';
-import useCardList from '@/hooks/useCardList';
-import TypingText from '@/components/TypingText';
+import SentenceText from '@/components/SentenceText';
 
-import { Link } from 'react-router-dom';
+// Hooks
+import useCardList from '@/hooks/useCardList';
+import useSentence from '@/hooks/useSentence';
 
 // Interface Properties {}
 
 export default function GamePage(): ReactElement {
-  const SENTENCE = [
-    '今までで一番の失敗は＿＿＿＿＿です。',
-    'ロールモデルは＿＿＿＿さんです。',
-    '人生で一番よかった選択は＿＿＿です。',
-    '一番学びたい技術は＿＿＿です。',
-    'この一週間、一番ありがたい人は＿＿さんです。',
-    'この一週間、一番申し訳ない人は＿＿さんです。',
-    '死ぬまでにやってみたいことは＿＿＿＿です。',
-    '一番の自慢は＿＿＿です。',
-    '自分を動物で例えると＿＿＿です。',
-  ];
-
   /** Hooks */
   const [cardList, setCardList, onResetCardList, onToggle] = useCardList();
+
+  const sentenceRef = useRef<{ onReset: () => void }>(null);
+  const cardListRef = useRef<{ onReset: () => void }>(null);
+
+  const onClickReset = () => {
+    if (sentenceRef.current && cardListRef.current) {
+      sentenceRef.current.onReset();
+      cardListRef.current.onReset();
+    }
+  };
+
+  // Const onClickReset = () => {
+  //   SetIsLoding(true);
+  //   SetTimeout(() => {
+  //     SetIsLoding(false);
+  //     OnResetCardList();
+  //     OnResetSentence();
+  //   }, 2000);
+  // };
 
   return (
     <PageTemplate>
@@ -35,19 +45,16 @@ export default function GamePage(): ReactElement {
             </span>
           </Link>
         </div>
-        <div className="p-2 mb-10 border shadow-2xl border-white/[.1] bg-white/[.05] rounded-xl">
-          <div className="text-center">
-            <TypingText />
-            {/* <span className="text-5xl ">asdasdasdasdasdasdasdasdas</span> */}
-          </div>
+        <div className="flex flex-row justify-center p-2 mb-10 border shadow-2xl border-white/[.1] bg-white/[.05] rounded-xl">
+          <SentenceText ref={sentenceRef} />
         </div>
         <div className="flex flex-row gap-2 h-[500px]">
-          <div className="flex flex-col justify-center p-2 text-center border shadow-2xl border-white/[.1] bg-white/[.05] grow rounded-xl">
-            <CardList cardList={cardList} onToggle={onToggle} />
+          <div className="flex flex-col justify-center p-2 border shadow-2xl border-white/[.1] bg-white/[.05] grow rounded-xl">
+            <CardList ref={cardListRef} />
           </div>
         </div>
         <button
-          onClick={onResetCardList}
+          onClick={onClickReset}
           className="absolute w-1/2 px-4 py-2 text-4xl font-bold text-white shadow-2xl bg-black/[.25] grow rounded-xl bottom-96 left-1/4 hover:bg-black/[.35]"
         >
           Reset!

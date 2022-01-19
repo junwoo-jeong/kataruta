@@ -1,18 +1,30 @@
-import type { ReactElement } from 'react';
+import { forwardRef, ReactElement, Ref, useImperativeHandle } from 'react';
 
 import Card from '@/components/Card';
 
+import useCardList from '@/hooks/useCardList';
+
 import styles from './CardList.module.css';
 
-interface Properties {
-  cardList: any[];
-  onToggle: any;
-}
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+interface Properties {}
 
-export default function CardList({
-  cardList,
-  onToggle,
-}: Properties): ReactElement {
+const CardList = (
+  _props: Properties,
+  ref: Ref<{ onReset: () => void }>
+): ReactElement => {
+  const [cardList, setCardList, onResetCardList, onToggle, onAllClose] =
+    useCardList();
+
+  useImperativeHandle(ref, () => ({
+    onReset: () => {
+      onAllClose();
+      setTimeout(() => {
+        onResetCardList();
+      }, 1000);
+    },
+  }));
+
   return (
     <div className={styles.CardList}>
       {cardList.map((card) => (
@@ -20,4 +32,6 @@ export default function CardList({
       ))}
     </div>
   );
-}
+};
+
+export default forwardRef(CardList);
